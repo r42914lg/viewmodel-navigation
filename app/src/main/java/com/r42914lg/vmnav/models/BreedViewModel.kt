@@ -19,7 +19,7 @@ class BreedViewModel : ViewModel() {
     private suspend fun observeBreeds() {
         mutableBreedState.tryEmit(
             BreedViewState.Content(
-                listOf("dsfsf, afsdfdsf, dsfsdfsdf, eqiwueyuwqiye, badhjagdja"),
+                listOf("dsfsf", "afsdfdsf", "dsfsdfsdf", "eqiwueyuwqiye", "badhjagdja"),
                 false
             )
         )

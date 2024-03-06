@@ -119,7 +119,7 @@ fun DetailsScreen(
     Column {
         when (state) {
             is PictureViewState.Content -> {
-                Text(text = "Showing details for breed ID -> $breedId")
+                Text(text = "Showing details for ID -> $breedId \n ${(state as PictureViewState.Content).pictureUrl}")
             }
             PictureViewState.Loading -> {
                 Text(text = "Loading")
