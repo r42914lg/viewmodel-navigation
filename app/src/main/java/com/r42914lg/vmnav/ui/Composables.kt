@@ -15,7 +15,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
@@ -28,21 +27,18 @@ import com.r42914lg.vmnav.models.PictureViewState
 @Composable
 fun MainScreen(
     viewModel: BreedViewModel = viewModel(),
-    onToDetails: (String) -> Unit,
-    onBack: () -> Unit,
 ) {
     val dogsState by viewModel.breedState.collectAsStateWithLifecycle()
-    val scope = rememberCoroutineScope()
 
     LaunchedEffect(viewModel) {
         viewModel.activate()
     }
     BackHandler {
-        onBack()
+        viewModel.onBack()
     }
     MainScreenContent(
         dogsState = dogsState,
-        onBreedSelected = onToDetails
+        onBreedSelected = { breed -> viewModel.onToDetailScreen(breed = breed) }
     )
 }
 
@@ -104,8 +100,6 @@ fun DogRow(breed: String, onClick: (String) -> Unit) {
 
 @Composable
 fun DetailsScreen(
-    onBack: () -> Unit = {},
-    breedId: String = "",
     pictureViewModel: PictureViewModel = viewModel(),
 ) {
     val state by pictureViewModel.state.collectAsStateWithLifecycle()
@@ -114,12 +108,12 @@ fun DetailsScreen(
         pictureViewModel.activate()
     }
     BackHandler {
-        onBack()
+        pictureViewModel.onBack()
     }
     Column {
         when (state) {
             is PictureViewState.Content -> {
-                Text(text = "Showing details for ID -> $breedId \n ${(state as PictureViewState.Content).pictureUrl}")
+                Text(text = "Showing details for ID -> breedId \n ${(state as PictureViewState.Content).pictureUrl}")
             }
             PictureViewState.Loading -> {
                 Text(text = "Loading")

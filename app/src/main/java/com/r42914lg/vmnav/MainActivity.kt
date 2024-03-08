@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.r42914lg.vmnav.ui.MyAppNavHost
+import androidx.navigation.compose.rememberNavController
+import com.r42914lg.vmnav.nav.NavigationComponent
 import com.r42914lg.vmnav.ui.theme.ViewModelNavigationTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,9 +16,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ViewModelNavigationTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    MyAppNavHost()
+                val navController = rememberNavController()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    NavigationComponent(navController)
                 }
             }
         }

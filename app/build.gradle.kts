@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation("io.insert-koin:koin-core:3.5.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
