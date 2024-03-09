@@ -35,6 +35,7 @@ abstract class NavRoute<T : RouteNavigator> {
             route = route,
             arguments = getArguments(),
         ) {
+            vmParams = parametersOf()
             getArguments().forEach { navArg ->
                 val mandatoryArg = it.arguments?.getString(navArg.name) ?: throw IllegalStateException()
                 vmParams.add(mandatoryArg)

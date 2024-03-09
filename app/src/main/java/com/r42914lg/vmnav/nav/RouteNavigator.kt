@@ -13,11 +13,11 @@ interface RouteNavigator {
     val navigationState: StateFlow<NavigationState>
 }
 
-/**
- * TODO - multiple navigate commands have yet to be implemented
- */
 class MyRouteNavigator : RouteNavigator {
 
+    /**
+     * TODO #1 - consider collection instead of single state to handle multiple subsequent navigation commands (TBD)
+     */
     override val navigationState: MutableStateFlow<NavigationState> =
         MutableStateFlow(NavigationState.Idle)
 
@@ -29,8 +29,12 @@ class MyRouteNavigator : RouteNavigator {
 
     override fun navigateUp() = navigate(NavigationState.NavigateUp())
 
+
     override fun navigateToRoute(route: String) = navigate(NavigationState.NavigateToRoute(route))
 
+    /**
+     * TODO #2 - consider to implement also "navigate with result" (TBD)
+     */
     @VisibleForTesting
     fun navigate(state: NavigationState) {
         navigationState.value = state

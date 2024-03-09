@@ -21,7 +21,7 @@ class BreedViewModel(
     }
 
     fun onToDetailScreen(breed: String) {
-        navigateToRoute(DetailsPageRoute.getRoute(breed, "Showing breed: "))
+        navigateToRoute(DetailsPageRoute.getRoute(breed))
     }
 
     fun onBack() {
@@ -31,7 +31,7 @@ class BreedViewModel(
     private fun observeBreeds() {
         mutableBreedState.tryEmit(
             BreedViewState.Content(
-                listOf("dsfsf", "afsdfdsf", "dsfsdfsdf", "eqiwueyuwqiye", "badhjagdja"),
+                listOf("Breed-1", "Breed-2", "Breed-3", "Breed-4", "Breed-5"),
                 false
             )
         )

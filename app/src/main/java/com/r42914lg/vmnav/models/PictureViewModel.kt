@@ -21,7 +21,7 @@ class PictureViewModel(
     suspend fun activate() {
         viewModelScope.launch {
             delay(2000)
-            _state.tryEmit(PictureViewState.Content("$message $breedId"))
+            _state.tryEmit(PictureViewState.Content("some-pic-url", breedId, message))
         }
     }
 
@@ -32,5 +32,9 @@ class PictureViewModel(
 
 sealed class PictureViewState {
     data object Loading : PictureViewState()
-    data class Content (val pictureUrl: String) : PictureViewState()
+    data class Content (
+        val pictureUrl: String,
+        val breedId: String,
+        val message: String,
+    ) : PictureViewState()
 }
