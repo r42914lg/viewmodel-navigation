@@ -16,7 +16,7 @@ class BreedViewModel(
 
     val breedState: StateFlow<BreedViewState> = mutableBreedState.asStateFlow()
 
-    suspend fun activate() {
+    fun activate() {
         observeBreeds()
     }
 
@@ -25,7 +25,7 @@ class BreedViewModel(
     }
 
     fun onBack() {
-
+        navigateUp()
     }
 
     private fun observeBreeds() {

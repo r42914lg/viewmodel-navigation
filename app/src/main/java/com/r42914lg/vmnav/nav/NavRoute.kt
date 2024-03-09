@@ -1,10 +1,12 @@
 package com.r42914lg.vmnav.nav
 
+import android.app.Activity
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -12,7 +14,6 @@ import org.koin.core.parameter.parametersOf
 
 abstract class NavRoute<T : RouteNavigator> {
 
-    protected open val route: String = ""
     protected var vmParams = parametersOf()
 
     @Composable
@@ -22,22 +23,21 @@ abstract class NavRoute<T : RouteNavigator> {
     abstract fun viewModel(): T
 
     abstract fun getRoute(vararg params: Any): String
+    protected open fun getArguments(): List<NamedNavArgument> = listOf()
 
-    protected open fun getMandatoryArgumentKeys(): List<String> = listOf()
-    protected open fun getOptionalArgumentKeys(): List<String> = listOf()
+    protected abstract val route: String
 
     fun composable(
         builder: NavGraphBuilder,
         navHostController: NavHostController
     ) {
-        builder.composable(route) {
-            getMandatoryArgumentKeys().forEach { key ->
-                val mandatoryArg = it.arguments?.getString(key) ?: throw IllegalStateException()
+        builder.composable(
+            route = route,
+            arguments = getArguments(),
+        ) {
+            getArguments().forEach { navArg ->
+                val mandatoryArg = it.arguments?.getString(navArg.name) ?: throw IllegalStateException()
                 vmParams.add(mandatoryArg)
-            }
-            getOptionalArgumentKeys().forEach { key ->
-                val optionalArg = it.arguments?.getString(key)
-                optionalArg?.let { vmParams.add(it) }
             }
 
             val viewModel = viewModel()
@@ -67,8 +67,11 @@ abstract class NavRoute<T : RouteNavigator> {
                 onNavigated(navigationState)
             }
             is NavigationState.NavigateUp -> {
-                navHostController.navigateUp()
+                val res = navHostController.navigateUp()
                 onNavigated(navigationState)
+                if (!res) {
+                    (navHostController.context as Activity).finish()
+                }
             }
             is NavigationState.Idle -> {
             }

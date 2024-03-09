@@ -26,7 +26,7 @@ class PictureViewModel(
     }
 
     fun onBack() {
-
+        navigateUp()
     }
 }
 

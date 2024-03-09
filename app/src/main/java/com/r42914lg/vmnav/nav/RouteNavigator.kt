@@ -13,6 +13,9 @@ interface RouteNavigator {
     val navigationState: StateFlow<NavigationState>
 }
 
+/**
+ * TODO - multiple navigate commands have yet to be implemented
+ */
 class MyRouteNavigator : RouteNavigator {
 
     override val navigationState: MutableStateFlow<NavigationState> =
