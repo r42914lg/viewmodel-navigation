@@ -37,8 +37,9 @@ abstract class NavRoute<T : RouteNavigator> {
         ) {
             vmParams = parametersOf()
             getArguments().forEach { navArg ->
-                val mandatoryArg = it.arguments?.getString(navArg.name) ?: throw IllegalStateException()
-                vmParams.add(mandatoryArg)
+                // TODO - distinguish between mandatory & optional arguments
+                val arg = it.arguments?.getString(navArg.name) ?: throw IllegalStateException()
+                vmParams.add(arg)
             }
 
             val viewModel = viewModel()
