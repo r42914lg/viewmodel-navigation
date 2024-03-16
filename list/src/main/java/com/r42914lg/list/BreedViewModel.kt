@@ -1,15 +1,14 @@
-package com.r42914lg.vmnav.models
+package com.r42914lg.list
 
 import androidx.lifecycle.ViewModel
-import com.r42914lg.vmnav.nav.RouteNavigator
-import com.r42914lg.vmnav.routes.DetailsPageRoute
+import com.r42914lg.details.DetailsPageRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class BreedViewModel(
-    private val routeNavigator: RouteNavigator,
-) : ViewModel(), RouteNavigator by routeNavigator {
+    private val routeNavigator: com.r42914lg.navigation.RouteNavigator,
+) : ViewModel(), com.r42914lg.navigation.RouteNavigator by routeNavigator {
 
     private val mutableBreedState: MutableStateFlow<BreedViewState> =
         MutableStateFlow(BreedViewState.Initial)

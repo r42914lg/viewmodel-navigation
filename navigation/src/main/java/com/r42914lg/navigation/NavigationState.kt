@@ -1,4 +1,4 @@
-package com.r42914lg.vmnav.nav
+package com.r42914lg.navigation
 
 import java.util.UUID
 

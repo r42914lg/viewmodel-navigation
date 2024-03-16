@@ -1,8 +1,8 @@
-package com.r42914lg.vmnav.models
+package com.r42914lg.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.r42914lg.vmnav.nav.RouteNavigator
+import com.r42914lg.navigation.RouteNavigator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

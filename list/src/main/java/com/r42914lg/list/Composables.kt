@@ -1,9 +1,8 @@
-package com.r42914lg.vmnav.ui
+package com.r42914lg.list
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,10 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.r42914lg.vmnav.models.BreedViewModel
-import com.r42914lg.vmnav.models.BreedViewState
-import com.r42914lg.vmnav.models.PictureViewModel
-import com.r42914lg.vmnav.models.PictureViewState
 
 @Composable
 fun MainScreen(
@@ -95,30 +90,5 @@ fun DogRow(breed: String, onClick: (String) -> Unit) {
             .padding(10.dp)
     ) {
         Text(breed, Modifier.weight(1F))
-    }
-}
-
-@Composable
-fun DetailsScreen(
-    pictureViewModel: PictureViewModel = viewModel(),
-) {
-    val state by pictureViewModel.state.collectAsStateWithLifecycle()
-
-    LaunchedEffect(pictureViewModel) {
-        pictureViewModel.activate()
-    }
-    BackHandler {
-        pictureViewModel.onBack()
-    }
-    Column {
-        when (state) {
-            is PictureViewState.Content -> {
-                val s = state as PictureViewState.Content
-                Text(text = "Showing details for ID -> ${s.breedId} \n ${s.message} ${s.pictureUrl}")
-            }
-            PictureViewState.Loading -> {
-                Text(text = "Loading")
-            }
-        }
     }
 }

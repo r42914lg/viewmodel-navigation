@@ -1,4 +1,4 @@
-package com.r42914lg.vmnav.nav
+package com.r42914lg.navigation
 
 import androidx.annotation.VisibleForTesting
 import kotlinx.coroutines.flow.MutableStateFlow

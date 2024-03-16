@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "ViewModel Navigation"
 include(":app")
- 
+include(":navigation")
+include(":list")
+include(":details")
